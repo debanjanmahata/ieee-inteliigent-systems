@@ -1,0 +1,33 @@
+\documentclass[border=10pt]{standalone}
+\usepackage{pgfplots}
+
+\begin{document}
+
+
+\begin{tikzpicture} 
+\begin{axis}[
+height=10cm,
+width=25cm,
+xmin=0,
+xmax=11,
+xtick={1,2,3,4,5,6,7,8,9,10},
+xlabel={Filter Size},
+ylabel={Evaluation Score: Micro-averaged F1 (class 1, 2)}
+]
+\addplot+[ mark=o,error bars/.cd, y dir=both,y explicit]
+coordinates { 
+	(	1	,	0.68024875	) +- (0, 	0.014209147	)
+	(	2	,	0.694999439	) +- (0, 	0.014006004	)
+	(	3	,	0.693904269	) +- (0, 	0.013688059	)
+	(	4	,	0.69516332	) +- (0, 	0.010422167	)
+	(	5	,	0.69586146	) +- (0, 	0.012740652	)
+	(	6	,	0.693458412	) +- (0, 	0.011757278	)
+	(	7	,	0.692693334	) +- (0, 	0.015673866	)
+	(	8	,	0.693278469	) +- (0, 	0.011392925	)
+	(	9	,	0.687189602	) +- (0, 	0.01176216	)
+	(	10	,	0.689356215	) +- (0, 	0.012776689	)};
+\end{axis} 
+\end{tikzpicture}
+
+
+\end{document}

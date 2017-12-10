@@ -1,0 +1,104 @@
+\documentclass[border=10pt]{standalone}
+%\usepackage{verbatim}
+
+\usepackage{pgfplots}
+
+%To change the size of each plot and also guarantee compatibility backwards (recommended) add the next line:
+%\pgfplotsset{width=10cm,compat=1.9}
+
+%To improve the compiling time you can configure the package to export the figures to separate PDF files and then import them into the document, just add the code shown below to the preamble:
+%\usepgfplotslibrary{external}
+%\tikzexternalize
+
+\begin{document}
+
+\begin{tikzpicture}
+\begin{axis}[
+height=10cm,
+width=25cm,
+grid=major,
+legend style={at={(0.63,0.50)},anchor=south west},
+xmin=0,
+xmax=21,
+xtick={1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20},
+xlabel={Model Id by Training Performance},
+ylabel={Evaluation Score: Micro-averaged F1 (class 1, 2)}
+]
+
+\addplot coordinates {
+	(	1	,	0.725559851	)
+	(	2	,	0.723552707	)
+	(	3	,	0.722773874	)
+	(	4	,	0.72252065	)
+	(	5	,	0.722489321	)
+	(	6	,	0.722099847	)
+	(	7	,	0.721730428	)
+	(	8	,	0.721595166	)
+	(	9	,	0.721098243	)
+	(	10	,	0.721060133	)
+	(	11	,	0.720704667	)
+	(	12	,	0.720567216	)
+	(	13	,	0.720438305	)
+	(	14	,	0.720431526	)
+	(	15	,	0.720299712	)
+	(	16	,	0.720100291	)
+	(	17	,	0.719981426	)
+	(	18	,	0.719965936	)
+	(	19	,	0.719880137	)
+	(	20	,	0.719778938	)
+};
+\addlegendentry{\shortstack{CNN ensembles on training data}}
+
+\addplot coordinates {
+	(	1	,	0.685600282	)
+	(	2	,	0.692968206	)
+	(	3	,	0.683831345	)
+	(	4	,	0.689297501	)
+	(	5	,	0.69851577	)
+	(	6	,	0.686255697	)
+	(	7	,	0.686749823	)
+	(	8	,	0.683311742	)
+	(	9	,	0.684774839	)
+	(	10	,	0.685774698	)
+	(	11	,	0.687769114	)
+	(	12	,	0.680560546	)
+	(	13	,	0.680785613	)
+	(	14	,	0.684889723	)
+	(	15	,	0.685306365	)
+	(	16	,	0.69249507	)
+	(	17	,	0.687035508	)
+	(	18	,	0.684266103	)
+	(	19	,	0.695993534	)
+	(	20	,	0.68240038	)
+};
+\addlegendentry{\shortstack{CNN ensembles on test data}}
+
+\addplot coordinates {
+	(	1	,	0.685600282	)
+	(	2	,	0.690565156	)
+	(	3	,	0.689315839	)
+	(	4	,	0.692704668	)
+	(	5	,	0.693227092	)
+	(	6	,	0.693167117	)
+	(	7	,	0.690742266	)
+	(	8	,	0.690498589	)
+	(	9	,	0.690767781	)
+	(	10	,	0.689915174	)
+	(	11	,	0.690425782	)
+	(	12	,	0.689451974	)
+	(	13	,	0.691119236	)
+	(	14	,	0.691736414	)
+	(	15	,	0.691908469	)
+	(	16	,	0.692380278	)
+	(	17	,	0.691355113	)
+	(	18	,	0.691672564	)
+	(	19	,	0.693059974	)
+	(	20	,	0.693141645	)
+};
+\addplot+[only marks, thick, mark options={scale=4, brown!60!black}] coordinates {(	3	,	0.689315839	) (	10	,	0.689915174	) (	20	,	0.693141645	)};
+\addlegendentry{\shortstack{Stacked ensemble of  CNN ensembles on test data}}
+
+\end{axis}
+\end{tikzpicture}
+
+\end{document}

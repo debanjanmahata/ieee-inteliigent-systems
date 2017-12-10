@@ -1,0 +1,67 @@
+\section{Related Work}
+
+Pharmacovigilance is the pharmacological science which deals with drug safety. It studies
+the collection, detection, monitoring, assessment, and prevention of harmful effects with
+pharmaceutical products. Mining social media messages such as tweets, articles, and Facebook
+posts for health and drug related information has received significant interest in
+pharmacovigilance research since people tend to share their daily activities on social media.
+Since pharmacovigilance heavily focuses on adverse drug reactions, it necessitates an automatic
+detection of the personal intake of medicine by sensing the social media to build smart
+health-care applications. Thus, developing automated classification models for identifying
+messages (e.g., tweets) containing description of personal intake of medicine is a pragmatic
+step towards the automation of Pharmacovigilance. Cramer~\emph{et al.}~\cite{cramer1989often} 
+found that as we increase the number of dosages of medicines (say from one to four times) in 
+a day, compliance rate decreases. Thus, several research work~\cite{harmark2008pharmacovigilance, saparova2012motivating, cambria2012sentic} 
+discussed and explored different healthcare problems though advanced technologies. 
+In this section, we provide a brief literature review on this problem.
+
+Neural networks technologies have yielded immense success in computer vision, natural 
+language processing, speech processing, machine translation, and 
+healthcare~\cite{kim2014convolutional, liang2014deep, shin2016lexicon, denkowski2017stronger}. 
+However, training deep neural networks to obtain good models is not easy and depends on 
+determining hyper-parameters optimally~\cite{glorot2010understanding}. 
+Bergstra~\emph{et al.}~\cite{bergstra2012random} performed the random search for hyper-parameter 
+optimization. Moreover, Lim~\emph{et al.}~\cite{lin2014user} used deep neural network 
+techniques to detect user-level psychological stress from social media. However, only
+going deeper with convolutions does not lead to the best solution~\cite{szegedy2015going}. 
+Thus, recent studies such as Le~\emph{et al.}~\cite{le2017convolutional} explored 
+shallow networks for text classification. They found that their shallow word models outperform 
+deep models. This encouraged us to use shallow networks in our proposed approach 
+to identify personal medication intake from Twitter.
+
+Due to an active participation of users on social media, it is now feasible
+to classify latent user attributes (\emph{e.g.}, gender, age, regional origin,
+and political orientation) in social media such as Twitter~\cite{rao2010classifying}.
+Research studies in last a few years indicate that social media is heavily used
+in building healthcare applications~\cite{grajales2014social, toxicovigilance, rosenthal2017semeval}.
+Sarker~\emph{et al.}~\cite{sarker2015utilizing} presented a review of pharmacovigilance techniques from
+social media data and discussed a possible pathway for automated pharmacovigilance research.
+Recently, Klein~\emph{et al.}~\cite{klein2017detecting} presented an annotated corpus
+to train machine learning models to find whether a tweet with a medication implies
+that the person (i.e, Twitterer) has taken that medication at any specific time.
+
+Often one solution to a complex problem does not fit to all scenarios~\cite{bell2010all}.
+Thus, researchers use ensemble techniques to address such problems. For instance, 
+Wang~\emph{et al.}~\cite{wang2008biomedical} presented classifiers ensemble approaches 
+for biomedical named entity recognition by combining combining Generalized Winnow, 
+Conditional Random Fields, Support Vector Machine, and Maximum Entropy through three 
+different strategies. Moreover, ensemble techniques have shown to perform well in 
+biomedical entity extraction~\cite{ekbal2013stacked} and named entity 
+recognition~\cite{sikdar2012differential, speck2014ensemble}. Furthermore, 
+stacked ensemble techniques are very useful in different healthcare 
+applications~\cite{dinakar2014stacked, speck2014ensemble}.
+
+Our literature review confirms that leveraging social media data using ensemble and 
+neural network techniques is very beneficial in healthcare applications. 
+Zhou~\emph{et al.}~\cite{zhou2002ensembling} presented a neural network ensemble and 
+proposed that many neural networks can be jointly used to solve a problem efficiently. 
+For instance, Deng and Platt~\cite{deng2014ensemble} ensemble deep learning for speech 
+recognition. Moreover, a recent work~\cite{liu2016ensemble} proposed several classifier 
+ensembles to effectively distinguish between adverse drug events (ADEs) and non-ADEs in 
+informal text on social media. Thus, in order to solve the problem of identifying personal 
+medication intake from Twitter, we train a stacked ensemble of shallow convolutional neural 
+network (CNN) models on an annotated dataset (see Section~\ref{evaluation}). We use random 
+search for tuning the hyper-parameters of the CNN and build an ensemble of best models that 
+achieved the best performance. 
+
+
