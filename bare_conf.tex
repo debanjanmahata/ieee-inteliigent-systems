@@ -530,6 +530,13 @@ Figure \ref{stackedcnn}, shows a high level architecture of the final stacked en
 %\subsection{Random Search of Hyperparameters}
 In order to get the best results from any classification model, hyperparameter tuning is a key step and CNNs are no exception. While the existing literature offers guidance on practical design decisions, identifying the best hyperparameters of a CNN requires experimentation. This requires evaluating trained models on a cross-validation dataset and choosing the best hyperparameters manually that produce best results. Automated hyperparameter searching methods like \textit{grid search}, \textit{random search}, and \textit{bayesian optimization} methods are also popularly used. In our presented system we use random search \cite{bergstra2012random}, to explore the hyperparameters of a shallow CNN architecture and form an ensemble of the best models, which we refer to as a stacked ensemble. Next, we share the detailed settings, output and analysis of our experiment.
 
+\begin{figure*}[htbp]
+	\centering
+	\includegraphics[scale=0.65]{filter_plot.pdf}
+	\caption{Individual 5-fold data ensemble and collective parameter ensemble (stacked ensemble) results for top 20 random search models. Models are sorted from left to right by decreasing 5-fold cross validation results. }
+	\label{plot_ensemble_eval}
+\end{figure*}
+
 \section{Experiment} 
 In this section, we present the experiments that we perform on the dataset in order to achieve the task presented in this paper. We give an overview of the dataset on which we train our models, and discuss about the hyperparameter settings. Results of our experiments are presented accompanied by a discussion of 
 \subsection{Dataset \label{dataset}}
@@ -548,6 +555,10 @@ The organizers of the task provided 8000 annotated tweets as a training dataset 
 \caption{Shared task data distribution. Class 1, 2 and 3 represents \textit{personal medication intake}, \textit{possible medication intake} and \textit{no medication intake}, respectively.}
 \label{dataset}
 \end{table}
+
+
+
+
 
 \subsection{Data Preprocessing}
 We use Spacy\footnote{https://spacy.io/}  for all our data preprocessing and cleaning activities. We do not remove stopwords. Each document in our training and test dataset is converted to a fixed size document of 47 words/tokens. We use two pre-trained word embeddings - godin \cite{godin2015multimedia} and shin \cite{shin2016lexicon}, shared by the authors. Each of these embeddings are of 400 dimensions. Each word in the input tweet is represented by its corresponding embedding vector, when present in the vocabulary of the model.
@@ -571,6 +582,7 @@ We use Spacy\footnote{https://spacy.io/}  for all our data preprocessing and cle
 \label{table_hyperparameters}
 \end{table}
 
+
 \subsection{Hyperparameter Settings for CNNS}
 We use Xavier weight initialization scheme \cite{glorot2010understanding}, for initializing the weights of the CNNs. Adam \cite{kingma2014adam} with two annealing restarts has been shown to work faster and perform better than SGD in other NLP tasks \cite{denkowski2017stronger}. Therefore, we use the same as our optimization algorithm. We use five filters with varying filter sizes in the convolution layer and use dropout during the training process. The models are implemented using TensorFlow\footnote{https://www.tensorflow.org/}. The entire ranges of the hyperparameters that we give to our random search procedure is shown in Table \ref{table_hyperparameters}. The word embedding model to be used during training is also treated as a hyperparameter.
 
@@ -580,27 +592,6 @@ We use Xavier weight initialization scheme \cite{glorot2010understanding}, for i
 	\caption{Individual 5-fold data ensemble and collective parameter ensemble (stacked ensemble) results for top 20 random search models. Models are sorted from left to right by decreasing 5-fold cross validation results. }
 	\label{plot_ensemble_eval}
 \end{figure*}
-
-\begin{figure*}[htbp]
-	\centering
-	\includegraphics[scale=0.65]{filter_plot.pdf}
-	\caption{Individual 5-fold data ensemble and collective parameter ensemble (stacked ensemble) results for top 20 random search models. Models are sorted from left to right by decreasing 5-fold cross validation results. }
-	\label{plot_ensemble_eval}
-\end{figure*}
-
-\subsection{Results \label{results}}
-
-\begin{equation}
-Precision_{1 + 2} = \frac{TP_{1} + TP_{2}}{TP_{1} + FP_{1} + TP_{2} + FP_{2}}
-\end{equation}
-
-\begin{equation}
-Recall_{1 + 2} = \frac{TP_{1} + TP_{2}}{TP_{1} + FN_{1} + TP_{2} + FN_{2}}
-\end{equation}
-
-\begin{equation}
-F-Score_{1+2} = \frac{2*Precision_{1 + 2}*Recall_{1 + 2}}{Precision_{1 + 2} + Recall_{1 + 2}}
-\end{equation}
 
 \begin{table*}[htbp]
 \centering
@@ -616,7 +607,22 @@ F-Score_{1+2} = \frac{2*Precision_{1 + 2}*Recall_{1 + 2}}{Precision_{1 + 2} + Re
 \label{table_ensemble_results}
 \end{table*}
 
-\begin{table}[]
+\subsection{Results \label{results}}
+
+\begin{equation}
+Precision_{1 + 2} = \frac{TP_{1} + TP_{2}}{TP_{1} + FP_{1} + TP_{2} + FP_{2}}
+\end{equation}
+
+\begin{equation}
+Recall_{1 + 2} = \frac{TP_{1} + TP_{2}}{TP_{1} + FN_{1} + TP_{2} + FN_{2}}
+\end{equation}
+
+\begin{equation}
+F-Score_{1+2} = \frac{2*Precision_{1 + 2}*Recall_{1 + 2}}{Precision_{1 + 2} + Recall_{1 + 2}}
+\end{equation}
+
+
+\begin{table}[htbp]
 \centering
 \begin{tabular}{|c|c|c|c|}
 \hline
